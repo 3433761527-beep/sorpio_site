@@ -1,16 +1,18 @@
-星空生日网站（iPhone Safari 适配）
+A Little Starry Sky — 11个互动环节生日网站
 
 文件：
-- index.html：网站入口
-- assets/growth-voxel.png：成长星辰像素风视觉图
-- assets/reference-photo.jpg：用户提供的人物参考照片（仅供本地编辑参考，不会自动公开展示）
+- index.html：网站主体
+- manifest.json：PWA基础配置
+- sw.js：基础离线缓存
 
-本地预览：解压后用浏览器打开 index.html。推荐使用 VS Code Live Server 或 Python http.server。
+部署到现有 GitHub 仓库：
+1. 解压此 ZIP。
+2. 将 index.html、manifest.json、sw.js 上传到仓库 3433761527-beep/sorpio_site 的 main 分支根目录。
+3. 若 GitHub 提示 index.html 已存在，选择替换。
+4. 确认 Settings -> Pages -> Deploy from a branch -> main -> /(root)。
+5. 等待 Actions 完成后访问：
+   https://3433761527-beep.github.io/sorpio_site/
 
-免费发布：
-1. 在 GitHub 创建 Public 仓库，例如 scorpio-birthday。
-2. 上传 index.html 和 assets 文件夹到仓库根目录。
-3. Settings -> Pages -> Deploy from a branch -> main -> /(root) -> Save。
-4. 等待 GitHub Pages 发布，网址通常为 https://你的GitHub用户名.github.io/scorpio-birthday/ 。
-
-重要限制：这是纯静态网站。访客提交的心情、留言、天空照片只在当前会话展示，不会自动传回给站长；要实现跨设备保存/管理员账号权限/远程内容更新，需要接入后端数据库和身份认证。网页里的编辑入口仅用于本机准备内容，不是安全的权限系统。上传音乐/照片需要作为网站资源一并部署，不能只保存在你的本地浏览器。
+编辑后台：
+点击网页右上角“编辑后台”。上传的媒体文件和访客互动记录目前保存在当前浏览器的 IndexedDB/localStorage 中。
+重要限制：GitHub Pages 是静态托管，本版本尚未接入云数据库和安全管理员身份验证，因此本地上传的媒体不会自动同步到其他设备。要实现跨设备同步、后台远程发布和访客数据集中管理，需要配置 Supabase 等云端服务。
