@@ -15,7 +15,8 @@ React 19 + TypeScript + Vite + Canvas + HTML5 Audio + Supabase。11 月 9 日，
 
 - 完整应用源码、Supabase SQL 迁移、GitHub Pages Actions、备份脚本已提供。
 - 本机可运行；未填 Supabase 环境变量时明确显示“本机预览”，本机预览数据只保存在当前浏览器。管理员页面不提供本地模拟登录。
-- **真实 Supabase 已接通，表结构已初始化，匿名访客登录已开启。**真实互动写入/读回、访客间读取与修改隔离、访客无法编辑/发布后台内容、真实图片上传/下载/删除均已验证。当前4173预览已构建为云端版本。管理员账号授权、正式内容发布、GitHub推送/部署和iPhone Safari真机验收尚未完成。
+- **真实Supabase已接通，管理员已授权，初始配置已发布；网站已部署至GitHub Pages。**正式网站：https://3433761527-beep.github.io/sorpio_site/ ，后台：https://3433761527-beep.github.io/sorpio_site/admin/ 。真实互动保存/读回、访客隔离及媒体上传/下载/删除均已验证。管理员用自己在Supabase创建的邮箱和密码登录，无默认密码。本人未获取管理员密码，未代用户进行邮箱密码登录。正式私人素材上传和iPhone真机验收仍待完成。
+- GitHub仓库根目录保存生产网站，完整源码在`source/`。现有Pages从`main`根目录自动发布；`.github/workflows/verify.yml`自动执行源码测试和构建。后台内容发布即时写入Supabase，无需重新构建。修改程序源码后需重新构建并更新根目录生产文件；`source/.github/workflows/deploy.yml`是可选的Actions发布模板，迁移使用时需调整工作目录并配置Pages来源与Actions变量。
 - 你提供的仓库是 https://github.com/3433761527-beep/sorpio_site 。原仓库包含一个本地存储版本和像素图片；本交付不删除或修改它们。
 - 没有私人回忆照片、聊天截图或用户音乐被擅自填入。缺少素材的环节显示上传提示，生日歌未上传时无法吹蜡烛。
 - 默认专属信件与纸条是可编辑初稿。建议把其中几张换成只有你们知道的真实细节。

@@ -168,11 +168,14 @@ export default function App() {
     current.current = next;
     setProgress(next);
     pending.current = next;
+    setStatus(cloud ? "正在保存到云端…" : "正在保存…");
     chain.current = chain.current.then(async () => {
       try {
         await saveProgress(next);
-        if (pending.current === next) pending.current = null;
-        setStatus(cloud ? "已保存到云端" : "已保存于本机预览");
+        if (pending.current === next) {
+          pending.current = null;
+          setStatus(cloud ? "已保存到云端" : "已保存于本机预览");
+        }
       } catch (e) {
         setStatus(`保存失败，请点重试：${(e as Error).message}`);
       }
