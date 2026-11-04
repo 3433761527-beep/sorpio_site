@@ -23,6 +23,7 @@ import {
 import { upload, download } from "./cloud";
 import { chime, Fireworks } from "./Effects";
 import { Growth } from "./Growth";
+import YouTubeMV from "./YouTubeMV";
 type Props = {
   id: number;
   config: Config;
@@ -79,7 +80,8 @@ export function Stage(p: Props) {
     </div>
   );
 }
-function Music({ config: c, audio, playing, toggleMusic }: Props) {
+function Music({ config: c, audio, playing, toggleMusic, record }: Props) {
+  const [mode, setMode] = useState(c.music.youtubeUrl ? "mv" : "audio");
   const [time, setTime] = useState(0),
     [duration, setDuration] = useState(0),
     [volume, setVolume] = useState(1);
@@ -99,70 +101,107 @@ function Music({ config: c, audio, playing, toggleMusic }: Props) {
     };
   }, [audio]);
   return (
-    <div className={`music-card ${playing ? "music-playing" : ""}`}>
-      <div className="record-cover">
-        {c.music.cover ? (
-          <img src={c.music.cover} alt="歌曲封面" />
-        ) : (
-          <div className="vinyl">
-            <span>✦</span>
-          </div>
-        )}
-        <div className="music-sparks">✧ · ✦ · ✧</div>
-      </div>
-      <small>TONIGHT'S SOUNDTRACK</small>
-      <h3>{c.music.title}</h3>
-      {!c.music.url ? (
-        <Empty text="今晚的旋律，还在等待被放进来。" />
-      ) : (
-        <>
-          <input
-            aria-label="播放进度"
-            type="range"
-            min="0"
-            max={duration || 1}
-            step=".1"
-            value={time}
-            onChange={(e) => {
-              if (audio.current) audio.current.currentTime = +e.target.value;
-            }}
-          />
-          <div className="time-row">
-            <span>
-              {Math.floor(time / 60)}:
-              {String(Math.floor(time % 60)).padStart(2, "0")}
-            </span>
-            <span>
-              {Math.floor(duration / 60)}:
-              {String(Math.floor(duration % 60)).padStart(2, "0")}
-            </span>
-          </div>
+    <>
+      {c.music.youtubeUrl && c.music.url && (
+        <div className="mv-actions">
           <button
-            className="round-play"
-            onClick={() => void toggleMusic()}
-            aria-label={playing ? "暂停" : "播放"}
+            aria-pressed={mode === "mv"}
+            onClick={() => {
+              audio.current?.pause();
+              setMode("mv");
+            }}
           >
-            {playing ? <Pause /> : <Play />}
+            官方MV
           </button>
-          <label className="volume">
-            <Volume2 size={15} />
-            <input
-              aria-label="音量"
-              type="range"
-              min="0"
-              max="1"
-              step=".05"
-              value={volume}
-              onChange={(e) => {
-                setVolume(+e.target.value);
-                if (audio.current) audio.current.volume = +e.target.value;
-              }}
-            />
-          </label>
-          <small>iPhone 的实际音量由设备音量键控制。</small>
-        </>
+          <button
+            aria-pressed={mode === "audio"}
+            onClick={() => setMode("audio")}
+          >
+            背景音乐MP3
+          </button>
+        </div>
       )}
-    </div>
+      {c.music.youtubeUrl && mode === "mv" ? (
+        <YouTubeMV
+          url={c.music.youtubeUrl}
+          title={c.music.title}
+          onPlaying={() => {
+            audio.current?.pause();
+            record(0, {
+              played: true,
+              source: "youtube",
+              url: c.music.youtubeUrl,
+            });
+          }}
+        />
+      ) : (
+        <div className={`music-card ${playing ? "music-playing" : ""}`}>
+          <div className="record-cover">
+            {c.music.cover ? (
+              <img src={c.music.cover} alt="歌曲封面" />
+            ) : (
+              <div className="vinyl">
+                <span>✦</span>
+              </div>
+            )}
+            <div className="music-sparks">✧ · ✦ · ✧</div>
+          </div>
+          <small>TONIGHT'S SOUNDTRACK</small>
+          <h3>{c.music.title}</h3>
+          {!c.music.url ? (
+            <Empty text="今晚的旋律，还在等待被放进来。" />
+          ) : (
+            <>
+              <input
+                aria-label="播放进度"
+                type="range"
+                min="0"
+                max={duration || 1}
+                step=".1"
+                value={time}
+                onChange={(e) => {
+                  if (audio.current)
+                    audio.current.currentTime = +e.target.value;
+                }}
+              />
+              <div className="time-row">
+                <span>
+                  {Math.floor(time / 60)}:
+                  {String(Math.floor(time % 60)).padStart(2, "0")}
+                </span>
+                <span>
+                  {Math.floor(duration / 60)}:
+                  {String(Math.floor(duration % 60)).padStart(2, "0")}
+                </span>
+              </div>
+              <button
+                className="round-play"
+                onClick={() => void toggleMusic()}
+                aria-label={playing ? "暂停" : "播放"}
+              >
+                {playing ? <Pause /> : <Play />}
+              </button>
+              <label className="volume">
+                <Volume2 size={15} />
+                <input
+                  aria-label="音量"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step=".05"
+                  value={volume}
+                  onChange={(e) => {
+                    setVolume(+e.target.value);
+                    if (audio.current) audio.current.volume = +e.target.value;
+                  }}
+                />
+              </label>
+              <small>iPhone 的实际音量由设备音量键控制。</small>
+            </>
+          )}
+        </div>
+      )}
+    </>
   );
 }
 function Mood({ config: c, record, progress }: Props) {

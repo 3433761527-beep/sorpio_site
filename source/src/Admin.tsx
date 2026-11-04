@@ -325,6 +325,14 @@ export default function Admin({
           c.music.title = v;
         }),
       )}
+      {field("YouTube官方MV链接（可选）", draft.music.youtubeUrl || "", (v) =>
+        change((c) => {
+          c.music.youtubeUrl = v.trim();
+        }),
+      )}
+      <p className="muted">
+        填写HTTPS视频链接后，第一颗星星可打开官方MV。无需提取音轨；需访客网络能访问YouTube。MP3仍可另行上传作为背景音乐。
+      </p>
       {mediaField(
         "背景音乐 MP3",
         draft.music.url,

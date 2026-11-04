@@ -1,3 +1,4 @@
+import { youtubeId } from "./youtube.ts";
 export type Media = {
   id: string;
   url: string;
@@ -13,7 +14,7 @@ export type Config = {
     notes: string[];
     gamesEnabled?: boolean;
   };
-  music: { url: string; title: string; cover: string };
+  music: { url: string; title: string; cover: string; youtubeUrl?: string };
   egg: { keyword: string; text: string; sound: string };
   colors: { name: string; hex: string }[];
   growth: { blessing: string; seconds: number; dress: string };
@@ -160,6 +161,8 @@ export function calculate(expression: string, previous = 0) {
   return (s.match(/[+-]?\d+/g) || []).reduce((a, b) => a + Number(b), 0);
 }
 export function validateConfig(c: Config) {
+  if (c.music.youtubeUrl && !youtubeId(c.music.youtubeUrl))
+    throw Error("MV地址必须为有效的YouTube HTTPS视频链接");
   if (!c.personal?.name?.trim() || c.personal.name.length > 40)
     throw Error("请填写礼物主人的名字（40字以内）");
   if (

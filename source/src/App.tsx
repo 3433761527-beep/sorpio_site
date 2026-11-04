@@ -273,12 +273,28 @@ export default function App() {
                 <button
                   className={`sound-control ${playing ? "on" : ""}`}
                   onClick={() =>
-                    config.music.url ? void toggleMusic() : openStage(0)
+                    config.music.youtubeUrl
+                      ? openStage(0)
+                      : config.music.url
+                        ? void toggleMusic()
+                        : openStage(0)
                   }
-                  aria-label={playing ? "暂停音乐" : "开启音乐"}
+                  aria-label={
+                    config.music.youtubeUrl
+                      ? "观看官方MV"
+                      : playing
+                        ? "暂停音乐"
+                        : "开启音乐"
+                  }
                 >
                   <Music2 size={15} />
-                  <span>{playing ? "音乐播放中" : "开启音乐"}</span>
+                  <span>
+                    {config.music.youtubeUrl
+                      ? "观看官方MV"
+                      : playing
+                        ? "音乐播放中"
+                        : "开启音乐"}
+                  </span>
                   <span className="equalizer">
                     <i />
                     <i />
