@@ -1,0 +1,209 @@
+/* Stars are revealed by the recipient's actions. Intro motion never completes them. */
+html {
+  overflow-x: clip;
+}
+body {
+  width: 100%;
+  overflow-x: clip;
+}
+.starfield,
+.nebula {
+  width: 100vw;
+  overflow: hidden;
+}
+.galactic-ribbon {
+  transform: none;
+}
+.comet-track {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 9;
+}
+.comet-track .wish-comet {
+  pointer-events: auto;
+}
+.dream-map.awake .star-node {
+  animation: none;
+  opacity: 1;
+  filter: none;
+}
+.dream-map .star-node .star-symbol {
+  font-size: 8px !important;
+  opacity: 0.3;
+  color: #b1a2c3;
+  animation: none;
+  text-shadow: none;
+  transition:
+    font-size 0.7s,
+    color 0.7s,
+    opacity 0.7s,
+    text-shadow 0.7s;
+}
+.dream-map .star-node .star-halo,
+.dream-map .star-node .star-aura,
+.dream-map .star-node .star-orbit-dot {
+  opacity: 0;
+  animation: none;
+  transition: opacity 0.8s;
+}
+.dream-map .star-node .star-label {
+  opacity: 0.68;
+  transition:
+    opacity 0.7s,
+    color 0.7s;
+  font-size: 10px;
+}
+.dream-map .current-star .star-symbol {
+  font-size: 13px !important;
+  opacity: 0.8;
+  color: #decee9;
+  text-shadow: 0 0 13px #c6a8da66;
+  animation: star-breathe 4s infinite alternate;
+}
+.dream-map .current-star .star-aura {
+  opacity: 0.6;
+  inset: 10px;
+  border: 1px solid #c6a6dc2b;
+  box-shadow: none;
+}
+.dream-map .current-star .star-label {
+  opacity: 1;
+  color: #d1bbdf;
+}
+.dream-map .visited .star-symbol {
+  font-size: 17px !important;
+  opacity: 1;
+  color: #dac6ec;
+  text-shadow:
+    0 0 10px #cfb5e488,
+    0 0 25px #a17cc63d;
+  animation: star-breathe 5s infinite alternate;
+}
+.dream-map .visited.antares .star-symbol {
+  font-size: 20px !important;
+  color: #e4c3d0;
+}
+.dream-map .visited .star-halo {
+  opacity: 0.6;
+  inset: -5px;
+  animation: visited-glow 1.8s both;
+}
+.dream-map .visited .star-label {
+  opacity: 1;
+}
+.dream-map .visited .star-aura {
+  opacity: 0.22;
+  inset: 7px;
+  border-color: #c9acd431;
+  box-shadow: none;
+}
+.dream-map .lit .star-symbol {
+  font-size: 18px !important;
+  color: #f3d4a7 !important;
+  text-shadow:
+    0 0 9px #edc98e88,
+    0 0 25px #d6ad7740;
+}
+.dream-map .lit .star-halo {
+  opacity: 0.5;
+  background: radial-gradient(circle, #e5c49820, transparent 65%);
+}
+.dream-map .lit .star-label {
+  opacity: 1;
+  color: #d9c39c;
+}
+.dream-map .lit .star-aura {
+  opacity: 0.35;
+  inset: 6px;
+  border-color: #e8c39332;
+}
+.dream-map.awake .dream-link {
+  animation: none;
+  stroke-dashoffset: 0;
+  stroke-width: 0.08;
+  opacity: 0.12;
+}
+.dream-map .visited-link {
+  fill: none;
+  stroke: #baa0ce;
+  stroke-width: 0.13;
+  opacity: 0.42;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: star-thread 1.2s both;
+}
+.dream-map .lit-link {
+  stroke-width: 0.14;
+  opacity: 0.65;
+}
+.dream-map.all-lit .complete-link {
+  stroke-width: 0.2;
+  opacity: 0.85;
+}
+.dream-map.replaying .visited {
+  animation: star-arrival 1.4s both;
+  animation-delay: calc(var(--wake-delay) * 0.65);
+}
+.dream-map .new-light .star-halo {
+  animation: new-starlight 2.5s both;
+}
+@keyframes visited-glow {
+  0% {
+    opacity: 0;
+    scale: 0.3;
+  }
+  35% {
+    opacity: 0.8;
+    scale: 1.5;
+  }
+  100% {
+    opacity: 0.5;
+    scale: 1;
+  }
+}
+@media (max-width: 760px) {
+  .dream-map .star-node .star-label {
+    font-size: 9px;
+    top: 42px;
+  }
+  .dream-map .current-star .star-symbol {
+    font-size: 11px !important;
+  }
+  .dream-map .visited .star-symbol {
+    font-size: 14px !important;
+  }
+  .dream-map .visited.antares .star-symbol {
+    font-size: 17px !important;
+  }
+  .dream-map .lit .star-symbol {
+    font-size: 15px !important;
+  }
+  .dream-map .current-star .star-aura {
+    inset: 10px;
+  }
+  .dream-map .visited .star-halo {
+    inset: 0;
+  }
+}
+@media (max-width: 370px) {
+  .dream-map .star-node .star-label {
+    font-size: 8px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dream-map.replaying .visited {
+    animation: none;
+    opacity: 1;
+  }
+  .dream-map .visited-link {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .dream-map .visited .star-symbol,
+  .dream-map .current-star .star-symbol,
+  .dream-map .visited .star-halo {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,616 @@
+.opening {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: hidden;
+  background: radial-gradient(
+    ellipse at 50% 42%,
+    #3d2b58 0,
+    #17162b 50%,
+    #0b0e1b 100%
+  );
+  color: #f5e8ee;
+  isolation: isolate;
+  padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+}
+.opening-top {
+  position: absolute;
+  top: max(22px, env(safe-area-inset-top));
+  left: 6%;
+  right: 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  z-index: 10;
+}
+.opening-top > span {
+  font-size: 8px;
+  letter-spacing: 2.5px;
+  color: #c8aec9;
+}
+.opening-top button {
+  min-height: 44px;
+  padding: 8px 15px;
+  border: 1px solid #ddc4e142;
+  border-radius: 30px;
+  background: #181629b0;
+  color: #e6c9dc;
+  font-size: 12px;
+}
+.opening-stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.opening-stars i {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #fff2de;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #e7b9e4;
+  animation: cinema-twinkle 3s ease-in-out infinite;
+}
+.opening-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' opacity='.2' filter='url(%23n)' d='M0 0h200v200H0z'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 8;
+}
+.opening-phone-scene {
+  position: absolute;
+  left: 50%;
+  top: 43%;
+  width: min(78vw, 430px);
+  height: 360px;
+  transform: translate(-50%, -50%);
+  transition:
+    opacity 0.8s,
+    transform 2s;
+}
+.room-window {
+  position: absolute;
+  width: 120px;
+  height: 170px;
+  left: 15px;
+  top: 4px;
+  border: 1px solid #c6b6d22b;
+  border-radius: 90px 90px 0 0;
+  box-shadow: inset 0 0 45px #c4bcdf13;
+}
+.room-moon {
+  position: absolute;
+  left: 65px;
+  top: 30px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: -9px 5px 0 #eedebc;
+  transform: rotate(-20deg);
+  opacity: 0.65;
+}
+.room-floor {
+  position: absolute;
+  bottom: 10px;
+  left: 5%;
+  width: 90%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e0bbda45, transparent);
+}
+.phone-girl-wrap {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  width: 240px;
+}
+.illustrated-girl {
+  width: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 10px 25px #130d2677);
+}
+.girl-eyes {
+  transform-origin: 120px 88px;
+  animation: girl-blink 5s infinite;
+}
+.girl-arm-wave {
+  transform-origin: 146px 151px;
+  animation: girl-wave 2.8s ease-in-out infinite;
+}
+.phone-girl .girl-arm-wave {
+  opacity: 0;
+}
+.phone-tap-hand {
+  transform-origin: 150px 200px;
+  animation: phone-touch 3.9s ease-in-out both;
+}
+.touch-ring {
+  position: absolute;
+  left: calc(50% - 9px);
+  top: 208px;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #f2d9f4;
+  border-radius: 50%;
+  animation: touch-pulse 3.9s both;
+  box-shadow: 0 0 25px #dab9ec;
+}
+.phone-portal {
+  position: absolute;
+  left: 50%;
+  top: 43%;
+  width: 145px;
+  height: 245px;
+  border: 1px solid #e3cffc;
+  box-shadow:
+    0 0 30px #d8b7ff,
+    inset 0 0 25px #b69add;
+  border-radius: 24px;
+  transform: translate(-50%, -50%) scale(0.02);
+  opacity: 0;
+  pointer-events: none;
+}
+.phone-portal > div {
+  position: absolute;
+  inset: 8px;
+  background: radial-gradient(ellipse, #fff1ea, #b59ae5 30%, #201b47 75%);
+  border-radius: 17px;
+}
+.phone-portal > i {
+  position: absolute;
+  inset: -25%;
+  border: 1px solid #d9c4ee40;
+  border-radius: 50%;
+  animation: portal-orbit 4s linear infinite;
+}
+.phone-portal > i:nth-of-type(2) {
+  inset: -55%;
+  animation-direction: reverse;
+}
+.phone-portal > i:nth-of-type(3) {
+  inset: -90%;
+}
+.phone-portal > span {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 70px;
+  color: #fff4da;
+}
+.opening-phase-1 .phone-portal {
+  animation: enter-phone 3s cubic-bezier(0.5, 0, 0.2, 1) both;
+}
+.opening-phase-1 .opening-phone-scene {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1.7);
+}
+.opening-phase-2 .opening-phone-scene,
+.opening-phase-3 .opening-phone-scene {
+  opacity: 0;
+  visibility: hidden;
+}
+.opening-host {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  width: min(48vw, 230px);
+  transform: translate(-50%, -45%) scale(0.85);
+  opacity: 0;
+  transition:
+    opacity 1.4s,
+    transform 2s;
+  pointer-events: none;
+}
+.opening-phase-2 .opening-host,
+.opening-phase-3 .opening-host {
+  opacity: 1;
+  transform: translate(-50%, -45%) scale(1);
+}
+.host-girl {
+  animation: host-float 5s ease-in-out infinite;
+}
+.host-orbit {
+  position: absolute;
+  inset: 4% -28%;
+  border: 1px solid #d4b6dd20;
+  border-radius: 50%;
+  box-shadow:
+    0 0 70px #c5a2d722,
+    inset 0 0 60px #c5a2d711;
+  transform: rotate(-28deg);
+}
+.host-name {
+  display: block;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #cfb8d5;
+  white-space: nowrap;
+  margin-top: 15px;
+}
+.opening-copy {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: max(10%, 70px);
+  text-align: center;
+  animation: cinema-copy 0.9s both;
+}
+.opening-copy .eyebrow {
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: #c5accd;
+}
+.opening-copy h1 {
+  font-family: "Noto Serif SC", serif;
+  font-size: clamp(19px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.8;
+  margin: 16px 0 10px;
+}
+.opening-copy p {
+  font-size: 12px;
+  line-height: 2;
+  color: #c3b0ca;
+  margin: 0 auto;
+  max-width: 440px;
+}
+.opening-enter {
+  margin: 22px auto 0;
+  padding: 14px 24px;
+  min-height: 48px;
+  border: 1px solid #e4c4e780;
+  border-radius: 30px;
+  color: #f5e7f0;
+  background: linear-gradient(110deg, #ac83c539, #efbdd02b);
+  box-shadow: 0 0 30px #dfb2d51a;
+  animation: cinema-copy 0.8s both;
+}
+.opening-enter span {
+  margin-left: 12px;
+  color: #efdbb0;
+}
+.opening-progress {
+  position: absolute;
+  bottom: max(28px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 9px;
+}
+.opening-progress i {
+  width: 22px;
+  height: 2px;
+  background: #ad91be38;
+  transition:
+    background 1s,
+    box-shadow 1s;
+}
+.opening-progress .lit {
+  background: #e3c7e7;
+  box-shadow: 0 0 10px #ddbbec;
+}
+.stage-modal {
+  animation: stage-arrive 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.stage-content {
+  animation: cinema-copy 0.7s 0.12s both;
+}
+.stage-heading {
+  animation: cinema-copy 0.7s 0.07s both;
+}
+.stage-atmosphere {
+  height: 65px;
+  max-width: 240px;
+  margin: -15px auto 10px;
+  position: relative;
+  pointer-events: none;
+  color: #d4b7dc;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.stage-atmosphere > span {
+  font:
+    29px Georgia,
+    serif;
+  animation: motif-float 4s ease-in-out infinite;
+  z-index: 1;
+  text-shadow: 0 0 25px #c29fe18c;
+}
+.stage-atmosphere i {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #f2d9ae;
+  left: calc(18% + var(--n, 0) * 16%);
+  top: 35%;
+  animation: motif-drift 3s ease-in-out infinite;
+}
+.stage-atmosphere i:nth-of-type(2) {
+  --n: 1;
+  animation-delay: -0.5s;
+}
+.stage-atmosphere i:nth-of-type(3) {
+  --n: 2;
+  animation-delay: -1s;
+}
+.stage-atmosphere i:nth-of-type(4) {
+  --n: 3;
+  animation-delay: -1.5s;
+}
+.stage-atmosphere i:nth-of-type(5) {
+  --n: 4;
+  animation-delay: -2s;
+}
+.stage-atmosphere svg {
+  position: absolute;
+  inset: 10px 0 0;
+  width: 100%;
+  fill: none;
+  stroke: #d1b0dc35;
+  stroke-width: 0.8;
+  stroke-dasharray: 6 9;
+  animation: motif-path 8s linear infinite;
+}
+.atmosphere-0 > span {
+  animation: music-tilt 1.8s ease-in-out infinite;
+}
+.atmosphere-2 > span {
+  color: #e4aecb;
+  animation: portal-orbit 10s linear infinite;
+}
+.atmosphere-4 > span {
+  animation: music-tilt 3s ease-in-out infinite;
+}
+.atmosphere-7 svg {
+  stroke: #9fc8df60;
+}
+.atmosphere-9 > span {
+  color: #f0d5b6;
+}
+.atmosphere-10 > span {
+  color: #f1c1d4;
+}
+.reveal {
+  animation: stage-arrive 0.8s both;
+}
+.reveal > span {
+  display: inline-block;
+  animation: motif-float 3s infinite;
+}
+.stage-content button:not(:disabled):active {
+  transform: scale(0.96);
+  transition: transform 0.15s;
+}
+.completion-bloom {
+  position: fixed;
+  top: 46%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  z-index: 1200;
+  pointer-events: none;
+}
+.completion-bloom i {
+  position: absolute;
+  font-size: 14px;
+  color: #f4dab1;
+  opacity: 0;
+  animation: completion-ray 1.6s ease-out both;
+  font-style: normal;
+}
+.completion-bloom i:nth-child(even) {
+  color: #e2b6de;
+}
+.replay-opening {
+  min-height: 44px;
+  color: #bda1cd;
+  font-size: 10px;
+  background: none;
+  border: 0;
+}
+@keyframes girl-blink {
+  0%,
+  42%,
+  46%,
+  100% {
+    transform: scaleY(1);
+  }
+  44% {
+    transform: scaleY(0.08);
+  }
+}
+@keyframes girl-wave {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25%,
+  65% {
+    transform: rotate(-12deg);
+  }
+  45%,
+  80% {
+    transform: rotate(7deg);
+  }
+}
+@keyframes phone-touch {
+  0%,
+  40% {
+    transform: translate(10px, 14px);
+  }
+  62%,
+  78% {
+    transform: translate(0, 0);
+  }
+  85%,
+  100% {
+    transform: translate(5px, 7px);
+  }
+}
+@keyframes touch-pulse {
+  0%,
+  55% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+@keyframes enter-phone {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.04);
+  }
+  15% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.65);
+  }
+  60% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(2);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(20);
+  }
+}
+@keyframes portal-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes cinema-copy {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+@keyframes cinema-twinkle {
+  50% {
+    opacity: 0.2;
+    transform: scale(0.5);
+  }
+}
+@keyframes host-float {
+  50% {
+    transform: translateY(-7px);
+  }
+}
+@keyframes stage-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes motif-float {
+  50% {
+    transform: translateY(-5px) rotate(7deg);
+  }
+}
+@keyframes music-tilt {
+  50% {
+    transform: rotate(-12deg) scale(1.1);
+  }
+}
+@keyframes motif-path {
+  to {
+    stroke-dashoffset: -120;
+  }
+}
+@keyframes motif-drift {
+  0%,
+  100% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-13px);
+    opacity: 0.8;
+  }
+}
+@keyframes completion-ray {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--angle)) translateX(0) scale(0.2);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--angle)) translateX(var(--reach)) scale(0.2);
+  }
+}
+@media (max-height: 690px) {
+  .opening-phone-scene {
+    top: 37%;
+    transform: translate(-50%, -50%) scale(0.72);
+  }
+  .opening-host {
+    top: 34%;
+    width: 155px;
+  }
+  .opening-copy {
+    bottom: 65px;
+  }
+  .opening-copy h1 {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  .opening-copy p {
+    font-size: 11px;
+  }
+  .opening-enter {
+    margin-top: 14px;
+    padding: 10px 18px;
+  }
+  .host-name {
+    font-size: 8px;
+    margin-top: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .opening *,
+  .stage-atmosphere *,
+  .illustrated-girl *,
+  .completion-bloom * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .phone-portal {
+    display: none;
+  }
+  .opening-phase-1 .opening-phone-scene {
+    opacity: 0;
+  }
+  .stage-modal,
+  .stage-heading,
+  .stage-content,
+  .reveal {
+    animation: none !important;
+  }
+}

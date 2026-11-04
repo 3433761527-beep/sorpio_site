@@ -1,0 +1,367 @@
+.merge-game {
+  max-width: 430px;
+  margin: auto;
+  text-align: center;
+  padding-top: 10px;
+}
+.merge-game h3 {
+  font-family: "Noto Serif SC", serif;
+  color: #e9cfe7;
+  font-weight: 400;
+  font-size: 20px;
+}
+.merge-instructions {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #b8a3c4;
+}
+.merge-scores {
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+  margin: 18px 0;
+}
+.merge-scores > span {
+  min-width: 75px;
+  padding: 8px 12px;
+  border: 1px solid #d7b6de30;
+  border-radius: 12px;
+  color: #b7a2c1;
+  font-size: 9px;
+  background: #dab9e709;
+}
+.merge-scores b {
+  display: block;
+  font-size: 18px;
+  color: #f0d6df;
+  margin-top: 4px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.merge-board-wrap {
+  position: relative;
+  border: 1px solid #d8b6e047;
+  border-radius: 19px;
+  padding: 10px;
+  background: linear-gradient(140deg, #ad88c920, #f2b7d017);
+  box-shadow:
+    0 12px 50px #100d2433,
+    inset 0 1px 0 #eed6fa18;
+}
+.merge-board {
+  position: relative;
+  aspect-ratio: 1;
+  --tile-gap: 8px;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  border-radius: 10px;
+  outline-offset: 4px;
+}
+.merge-cells {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--tile-gap);
+}
+.merge-cells i {
+  background: #dfc9ed0b;
+  border: 1px solid #d4b5de12;
+  border-radius: 10px;
+}
+.merge-tile {
+  position: absolute;
+  width: calc((100% - 3 * var(--tile-gap)) / 4);
+  height: calc((100% - 3 * var(--tile-gap)) / 4);
+  transition:
+    top 0.16s ease,
+    left 0.16s ease;
+  pointer-events: none;
+}
+.merge-tile-inner {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #fff6df, #f0dec1);
+  border-radius: 10px;
+  box-shadow:
+    0 2px 8px #0002,
+    inset 0 1px 0 #fff9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  animation: tile-born 0.25s both;
+}
+.merge-tile strong {
+  font-family: Georgia, serif;
+  font-size: clamp(14px, 4vw, 23px);
+  line-height: 1;
+  color: #5d486e;
+  margin-top: -3px;
+  z-index: 1;
+  font-variant-numeric: tabular-nums;
+}
+.sanrio-friend {
+  display: block;
+  width: 85%;
+  height: 69%;
+  overflow: visible;
+}
+.level-1 .merge-tile-inner {
+  background: linear-gradient(145deg, #ecf8ff, #c6e0f2);
+}
+.level-2 .merge-tile-inner {
+  background: linear-gradient(145deg, #f5f4ea, #d9e6ce);
+}
+.level-3 .merge-tile-inner {
+  background: linear-gradient(145deg, #eddef6, #c9b4de);
+}
+.level-4 .merge-tile-inner {
+  background: linear-gradient(145deg, #fff0f1, #f0bfd0);
+}
+.level-5 .merge-tile-inner {
+  background: linear-gradient(145deg, #edf8ed, #bcd8d2);
+}
+.level-6 .merge-tile-inner {
+  background: linear-gradient(145deg, #ffe5ed, #efb7d2);
+}
+.level-7 .merge-tile-inner {
+  background: linear-gradient(145deg, #e1ebff, #a8c4ec);
+}
+.level-8 .merge-tile-inner {
+  background: linear-gradient(145deg, #d3f2e9, #91d0ca);
+}
+.level-9 .merge-tile-inner {
+  background: linear-gradient(135deg, #c9e7ff, #f3c9e5);
+}
+.tile-merged .merge-tile-inner {
+  animation: tile-merge 0.28s both;
+  box-shadow: 0 0 20px #eec1ec80;
+}
+.friend-sway {
+  transform-origin: 50px 75px;
+  animation: friend-sway 4s ease-in-out infinite;
+}
+.friend-wave {
+  transform-origin: 72px 70px;
+  animation: friend-wave 3s ease-in-out infinite;
+}
+.friend-ears {
+  transform-origin: 50px 30px;
+  animation: friend-ears 3.5s ease-in-out infinite;
+}
+.friend-eyes {
+  transform-origin: 50px 44px;
+  animation: friend-blink 5s infinite;
+}
+.friend-spark {
+  animation: cinema-twinkle 3s infinite;
+}
+.friend-1 .friend-ears {
+  animation-delay: -1s;
+}
+.friend-3 .friend-sway {
+  animation-delay: -2s;
+}
+.merge-controls,
+.merge-directions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 12px 0;
+}
+.merge-controls button,
+.merge-directions button {
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid #cfadd23b;
+  border-radius: 12px;
+  padding: 9px 13px;
+  color: #dfc1df;
+  background: #dab1d711;
+  font-size: 11px;
+}
+.merge-directions button {
+  font-size: 20px;
+}
+.merge-status {
+  font-size: 10px;
+  color: #bba1c5;
+  min-height: 16px;
+  margin-top: 15px;
+}
+.merge-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background: #20192ce8;
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 22px;
+  z-index: 3;
+  animation: cinema-copy 0.4s both;
+}
+.merge-celebrate {
+  font-size: 45px;
+  color: #e8c9ae;
+  animation: motif-float 2s infinite;
+}
+.merge-overlay h4 {
+  font-family: "Noto Serif SC", serif;
+  font-size: 19px;
+  color: #f4d7e6;
+  line-height: 1.7;
+  margin: 12px 0;
+}
+.merge-overlay p {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #c8b1cc;
+}
+.merge-overlay button {
+  padding: 12px 18px;
+  min-height: 44px;
+  border: 1px solid #d5b1d960;
+  border-radius: 25px;
+  background: #dab1db18;
+  color: #eecfe5;
+  margin-top: 9px;
+  font-size: 12px;
+}
+.friend-collection {
+  margin-top: 23px;
+  text-align: left;
+  border-top: 1px solid #dab5e12b;
+  padding-top: 16px;
+}
+.friend-collection summary {
+  cursor: pointer;
+  font-size: 11px;
+  color: #c8a9cf;
+  min-height: 35px;
+}
+.friend-collection > div {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+.friend-collection > div > span {
+  height: 95px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  background: #efcfeb0b;
+  padding: 5px;
+}
+.friend-collection .sanrio-friend {
+  height: 53px;
+  width: 56px;
+}
+.friend-collection b {
+  font-size: 11px;
+  color: #f0cbdc;
+}
+.friend-collection small {
+  font-size: 8px;
+  color: #b59fc1;
+  line-height: 2;
+}
+.friend-collection p {
+  font-size: 8px;
+  color: #8f7d9f;
+  line-height: 1.9;
+}
+.friend-collection a {
+  color: #c5afd4;
+  text-decoration: underline;
+}
+.game-cards {
+  grid-template-columns: repeat(4, 1fr);
+}
+@keyframes tile-born {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes tile-merge {
+  50% {
+    transform: scale(1.13);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes friend-sway {
+  50% {
+    transform: rotate(4deg) translateY(-2px);
+  }
+}
+@keyframes friend-wave {
+  0%,
+  70%,
+  100% {
+    transform: rotate(0);
+  }
+  20%,
+  45% {
+    transform: rotate(-20deg);
+  }
+  30%,
+  55% {
+    transform: rotate(8deg);
+  }
+}
+@keyframes friend-ears {
+  50% {
+    transform: scaleX(1.04) rotate(-3deg);
+  }
+}
+@keyframes friend-blink {
+  0%,
+  45%,
+  49%,
+  100% {
+    transform: scaleY(1);
+  }
+  47% {
+    transform: scaleY(0.12);
+  }
+}
+@media (max-width: 600px) {
+  .game-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .merge-board {
+    --tile-gap: 6px;
+  }
+  .merge-game h3 {
+    font-size: 18px;
+  }
+  .merge-tile strong {
+    font-size: 19px;
+  }
+  .friend-collection small {
+    font-size: 7px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sanrio-friend *,
+  .merge-tile-inner,
+  .merge-celebrate {
+    animation: none !important;
+  }
+  .merge-tile {
+    transition: none !important;
+  }
+}

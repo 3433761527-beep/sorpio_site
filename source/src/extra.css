@@ -1,0 +1,52 @@
+.letter-paper > div {
+  transition: opacity 2s 0.3s;
+}
+.birthday-scene .cake-halo{background:radial-gradient(ellipse,color-mix(in srgb,var(--party-accent,#b5a0cf) 22%,transparent),transparent 68%)}
+.birthday-scene .cake-top{background:radial-gradient(ellipse,color-mix(in srgb,var(--party-accent,#b5a0cf) 28%,#f4dfe0),#ddbacb)}
+.nebula:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 65% 60%, #a383bc0d, transparent 55%),
+    linear-gradient(125deg, transparent 30%, #c5a9e106 50%, transparent 65%);
+  animation: galaxy-drift 25s ease-in-out infinite alternate;
+  will-change: transform;
+  transform-origin: center;
+  pointer-events: none;
+}
+@keyframes galaxy-drift {
+  to {
+    transform: translate3d(2%, 1%, 0) rotate(5deg);
+    opacity: 0.55;
+  }
+}
+@media (max-width: 760px) {
+  .intro h1 em {
+    display: block;
+    white-space: nowrap;
+  }
+  .intro h1 {
+    font-size: 52px;
+  }
+  .intro h1 em {
+    font-size: 1.08em;
+    line-height: 1.13;
+  }
+  .nav {
+    padding-top: env(safe-area-inset-top);
+  }
+  .sky-pair input {
+    font-size: 16px;
+  }
+}
+@media (max-width: 370px) {
+  .intro h1 {
+    font-size: 46px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nebula:after {
+    animation: none;
+  }
+}
